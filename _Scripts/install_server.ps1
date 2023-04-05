@@ -1,5 +1,5 @@
 ﻿## ACHTUNG PFADE anpassen: $scriptX
-$scriptPath = "\\printserver\c$\_Stats\_Scripts\"
+$scriptPath = "C:\_Stats\_Scripts\"
 
 ## Am Printserver zu installieren: Printer Event
 $TaskName = "PRINTSERVER - Printer Event"
@@ -37,7 +37,7 @@ if ($ExistingTask) {
 }
 
 $TaskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -File $script2"
-$Trigger = New-ScheduledTaskTrigger -Once -At "00:00" -RepetitionInterval (New-TimeSpan -Hours 1)
+$Trigger = New-ScheduledTaskTrigger -Once -At "00:05" -RepetitionInterval (New-TimeSpan -Hours 1)
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 $Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 
@@ -50,7 +50,7 @@ if ($TaskAction -and $Trigger -and $Settings -and $Principal) {
 ## Am Printserver zu installieren: allPrintJobs
 $TaskName = "PRINTSERVER - Join all Print Jobs"
 $TaskDescription = "Runs the script every hour"
-$script3 = "Spooler_PrintQueue.ps1"
+$script3 = "allPrintJobs.ps1"
 $script3 = Join-Path -Path $scriptPath -ChildPath $script3
 
 # Überprüfen, ob der Task bereits existiert und löschen, falls vorhanden
@@ -60,7 +60,7 @@ if ($ExistingTask) {
 }
 
 $TaskAction = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -File $script3"
-$Trigger = New-ScheduledTaskTrigger -Once -At "00:00" -RepetitionInterval (New-TimeSpan -Hours 1)
+$Trigger = New-ScheduledTaskTrigger -Once -At "00:10" -RepetitionInterval (New-TimeSpan -Hours 1)
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 $Principal = New-ScheduledTaskPrincipal -UserId "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 
@@ -73,7 +73,7 @@ if ($TaskAction -and $Trigger -and $Settings -and $Principal) {
 ## Am Printserver zu installieren: all Clients
 $TaskName = "PRINTSERVER - all Clients"
 $TaskDescription = "Runs the script every hour"
-$script4 = "Spooler_PrintQueue.ps1"
+$script4 = "allClients.ps1"
 $script4 = Join-Path -Path $scriptPath -ChildPath $script4
 
 # Überprüfen, ob der Task bereits existiert und löschen, falls vorhanden
