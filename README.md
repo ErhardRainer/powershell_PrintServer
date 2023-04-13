@@ -3,6 +3,7 @@ Reporting (Power BI Dashboard) about a Windows Print Server
 
 ## History
 - 2023-04-05 ER initial Version
+- 2023-04-13 ER Power BI Dashboard überarbeitet (Bugs behoben)
 
 ## Configuration
 ### PRINTSERVER
